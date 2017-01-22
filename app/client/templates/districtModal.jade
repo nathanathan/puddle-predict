@@ -1,0 +1,48 @@
+template(name="districtModal")
+  .modal.fade(role="dialog")
+    .modal-dialog
+      .modal-content
+        form#editEvent(novalidate)
+          with feature.properties
+            if malaria_cases_wep
+              .modal-header
+                .modal-header--title
+                  h4=district
+              .modal-body.clearfix
+                p Last week this district saw the following conditions:
+                ul
+                  li
+                    | Cases as a percentage of district population
+                    if case_ratio_above_median
+                      b above
+                    else
+                      b below
+                    | {{percentage ../medianCasesOverPopulation 1 2}}%#[sup 1].
+                  li
+                    | District weely rainfall
+                    if district_mean_rainfall_mm_above_median
+                      b above
+                    else
+                      b below
+                    | {{formatNumber ../medianWeeklyRainfallMm}} millimeters#[sup 1].
+                  li
+                    | Case count
+                    if cases_anomoly
+                      b above
+                    else
+                      b not above
+                    | 5 week rolling average by more than one standard deviation.
+                p In #{future_outbreaks} of #{occurrences} historical district-weeks
+                  | with the same conditions
+                  | ({{percentage future_outbreaks occurrences}}%)
+                  | an outbreak#[sup 2] occured 2 months into the future.
+                p The projected number of cases in two months is {{formatNumber projectedCases}}.
+                  | If an outbreak occurs
+                p 1.
+                  | This threshold is determined by the median value over all district-weeks.
+                p 2.
+                  | An outbreak is defined as the number of cases over the ensuing month
+                  | increasing above the current rolling
+                  | average by more than one rolling standard deviation.
+            else
+              p Case data is not available for this district.

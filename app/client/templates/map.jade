@@ -1,0 +1,44 @@
+template(name='map')
+  .map
+    if loading
+      +loadingDialog
+
+  #sidebar.sidebar.sidebar-left.sidebar-main
+    // Nav tabs
+    ul.sidebar-tabs
+      li#sidebar-collapse-tab
+        a(href='#sidebar-search-and-advanced-filter' role='tab')
+          i.fa.fa-chevron-circle-left.fa-white
+      button#sidebar-plus-button.sidebar-zoom-in.fa.fa-plus.btn.btn-sm
+      button#sidebar-minus-button.sidebar-zoom-out.fa.fa-minus.btn.btn-sm
+
+    // Tab panes
+    .sidebar-content
+      .sidebar-pane.active
+        .logo Puddle Predict
+        .list-group.map-views
+          a.list-group-item(href='/', class='{{#if eq "outbreakRisk" page}}active{{/if}}') Outbreak Risk
+          a.list-group-item(href='/precipitation', class='{{#if eq "precipitation" page}}active{{/if}}') Precipitation
+          a.list-group-item(href='/current-cases', class='{{#if eq "current-cases" page}}active{{/if}}') Current Cases
+          a.list-group-item(href='/projected-cases', class='{{#if eq "projected-cases" page}}active{{/if}}') Projected Cases
+        .as-of As of: #{dataDate}
+
+template(name='legend')
+  h4 {{label}}
+  .values
+    each values
+      .value
+        .value--key(style="background:#{color}")
+        .value--marker(style="background:#{color}")
+        .value--value #{value}
+
+template(name='infoBox')
+  if props
+    with props
+      .active
+        h2=district
+        if malaria_cases_wep
+          span {{percentage future_outbreaks occurrences}}% risk of outbreak in 2 months,
+          span {{formatNumber malaria_cases_wep}} malaria cases over the past week,
+          span {{formatNumber district_mean_rainfall_mm}}mm of rainfall
+          

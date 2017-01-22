@@ -1,0 +1,91 @@
+$control-BG = alpha($whiteBG, 80%)
+
+.sidebar-left-closed
+  .leaflet-left.leaflet-top
+    left $sidebar-tabs-width - 10px
+
+.sidebar-right-closed
+  .leaflet-left.leaflet-top
+    right $data-table-width - 20px
+
+.leaflet-container
+  font 12px/1.5 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
+.leaflet-control-attribution
+  padding-right 30px
+
+.leaflet-left.leaflet-top
+  left $sidebar-full-width
+  top 0
+  right 0
+  border-radius 0
+  transition .5s
+  .info
+    display flex
+    align-items baseline
+    width 100%
+    margin 0
+    padding 12px 15px 15px
+    box-shadow none
+    border-radius 0
+    min-height 60px
+    background $control-BG
+    transition .2s
+    &.active
+      background $whiteBG
+    h2
+      display inline-block
+      margin 0
+      font-weight 800
+      font-size 2em
+      color darken($primary, 20%)
+    ul
+      margin-left 20px
+      margin-bottom 0
+      color $dd-gray
+      span
+        font-weight 600
+      &
+      li
+        display inline-block
+      li
+        font-size 1.3em
+        margin-right 20px
+    p
+      margin 0
+      color $d-gray
+      align-self center
+
+.legend
+  right 10px
+  min-width 300px
+  background alpha($control-BG, 90%)
+  border-radius 2px
+  .values
+    display flex
+    flex-grow 1
+    line-height 18px
+  .value
+    flex 1 1 0
+  .value--key
+    min-height 20px
+    margin-bottom 0px
+  .value--marker
+    min-height 5px
+    width 1px
+    margin-bottom 4px
+  .value--value
+    font-size 90%
+    padding-right 10px
+  h4
+    margin 0 0 10px 0
+    font-size 1em
+    text-align center
+
+.list-group.map-views .active
+  background-color $primary-light
+
+.as-of
+  position absolute
+  bottom 0
+  margin 10px

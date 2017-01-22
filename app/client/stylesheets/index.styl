@@ -1,0 +1,196 @@
+@import 'variables.import'
+@import 'mixins.import'
+
+@import 'globals.import'
+
+@import 'utils.import'
+@import 'loading.import'
+@import 'modals.import'
+
+@import 'sidebar.import'
+@import 'map.import'
+
+body
+html
+.map
+  height 100%
+  width 100%
+
+body
+  primaryFont()
+
+.element-details-container
+  position absolute
+  bottom 10px
+  right 20px
+  min-width 300px
+  border-radius 4px
+  border 5px solid $p-transparent
+  font-family $fonts
+  .tab-content
+    padding 10px
+    background $whiteBG
+  .tab-pane
+    min-height 140px
+    .row
+      margin-bottom 3px
+
+.element-details-nav
+  position relative
+  background $whiteBG
+  border-bottom 1px solid rgba(226, 226, 226, 1)
+  > li
+    width auto
+    float left
+    border-right 1px solid #E2E2E2
+    &:last-of-type
+      border-right 0
+    > a
+      color $primary
+  .active
+    background $active
+    font-weight bold
+
+.element-details-close
+  line-height inherit
+  position absolute
+  right 10px
+  top 50%
+  transform translate(0,-50%)
+
+.marker-icon
+  cursor pointer
+
+.tab-content
+  overflow-x hidden
+  overflow-y auto
+
+#sidebar-layer
+  layer-container-width()
+  box-shadow 0 0px 0px rgba(0,0,0,0)
+
+.spinner
+  position absolute
+  right 15px
+  top 17px
+  font-size 16px
+  color #666
+  z-index 2000
+
+.leaflet-container
+  background-color white
+
+.leaflet-top.leaflet-left
+  z-index 1004
+.leaflet-top.leaflet-right
+  z-index 1003
+.leaflet-bottom.leaflet-left
+  z-index 1002
+.leaflet-bottom.leaflet-right
+  z-index 1001
+
+#mapLegendPanel
+  width 180px
+
+p.intro
+  line-height 1.5
+  margin 5px 0 35px 0
+  font-size larger
+
+#container
+  width 100%
+  height 100%
+
+.title
+  margin-top 0
+  margin-bottom 10px
+  text-align center
+
+.notice
+  margin 10px 0 5px 0
+  line-height 1.5
+  text-align center
+
+.info
+  padding 6px 8px
+  font-family $primary-font
+
+@media all and (max-width: 480px)
+  /* styles for iPhone/Android landscape (and really narrow browser windows) */
+  .notice
+    font-size 11px
+
+@media all and (max-width: 320px)
+  /* styles for iPhone/Android portrait */
+  .notice
+    font-size 11px
+
+@media all and (max-width: 240px)
+  /* styles for smaller devices */
+  .notice
+    font-size 11px
+
+.leaflet-control-zoom
+  clear none // allows horizontal stacking with filter
+
+.searchBar
+  position relative
+  width 100%
+  border-left 0
+  border-right 0
+  background $ll-gray
+  border-top 4px solid $primary
+  border-bottom 1px solid $primary
+  font-size 1em
+
+#searchIcon
+  verticallyCenter()
+  left 10px
+  font-size 1.4em
+  color $primary
+
+.twitter-typeahead
+  position static !important // Overides typeahead's inline styling
+
+.tt-dropdown-menu
+  border-top-left-radius 0
+  border-top-right-radius 0
+  border 0
+  height 635px
+  overflow-y auto
+  overflow-x hidden
+
+.pull-middle
+  display table-cell
+  vertical-align middle
+  float none
+
+.pager
+  display inline
+
+.slider.slider-horizontal
+  width 250px
+  cursor pointer
+
+.slider-wrapper
+  margin-bottom 50px
+
+.slider
+  &.slider-horizontal
+    .slider-handle
+      margin-left -7px
+      margin-top -6px
+
+.slider-handle
+  width 22px
+  height 22px
+  border 2px solid white
+  background lighten($primary, 10%)
+  transition background .1s
+  &:focus
+    outline 0
+    border-color darken($primary, 30%)
+    background darken($primary, 10%)
+  &:active
+    background $green
+    border-color white

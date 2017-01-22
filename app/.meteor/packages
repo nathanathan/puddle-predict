@@ -1,0 +1,37 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+eha:nojs-banner
+
+meteor-base@1.0.4             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.10                   # The database Meteor supports right now
+blaze-html-templates@1.0.4    # Compile .html files into Meteor Blaze views
+session@1.1.6                 # Client-side reactive dictionary for your app
+jquery@1.11.9                  # Helpful client-side library
+tracker@1.1.0                 # Meteor's client-side reactive programming library
+http
+
+es5-shim@4.6.13                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.5.7              # Enable ECMAScript2015+ syntax in app code
+
+ejson@1.0.12
+coffeescript@1.2.3
+reactive-var@1.0.10
+bevanhunt:leaflet@3.0.1
+grits:flirt-sidebar
+flawless:meteor-toastr@1.0.1
+twbs:bootstrap@3.3.5
+mquandalle:stylus@1.1.1
+fortawesome:fontawesome@4.4.0
+rcy:chromajs
+mquandalle:jade
+okgrow:analytics
+kadira:flow-router
+standard-minifier-js
+kadira:blaze-layout
+momentjs:moment
+peppelg:bootstrap-3-modal
