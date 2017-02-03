@@ -34,15 +34,18 @@ template(name="districtModal")
                     | 5 week rolling average by more than one standard deviation.
                 p In #{future_outbreaks} of #{occurrences} historical district-weeks
                   | with the same conditions
-                  | ({{percentage future_outbreaks occurrences}}%)
+                  | (#[b {{percentage future_outbreaks occurrences}}%])
                   | an outbreak#[sup 2] occured 2 months into the future.
-                p The projected number of cases in two months is {{formatNumber projectedCases}}.
-                  | If an outbreak occurs
+                p The projected number of cases in two months is #[b {{formatNumber projected_cases}}]#[sup 3].
+                  | If an outbreak occurs there will be at least #[b {{formatNumber outbreak_threshold}}] cases#[sup 2].
                 p 1.
                   | This threshold is determined by the median value over all district-weeks.
                 p 2.
                   | An outbreak is defined as the number of cases over the ensuing month
                   | increasing above the current rolling
                   | average by more than one rolling standard deviation.
+                p 3.
+                  | The projected number of cases is based on the median percentage change
+                  | in historical district-weeks with matching conditions.
             else
               p Case data is not available for this district.

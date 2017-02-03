@@ -3,7 +3,7 @@ utils = require '/imports/utils.coffee'
 UgandaGeoJSON = require '/imports/data/uganda-district-precipitation-2016-11.json'
 
 OUTBREAK_RAMP = chroma.scale(['#287431', '#6fc236', '#f5e324']).colors(10)
-PRECIPITATION_RAMP = chroma.scale(['#6fc236', '#2bb4f1', '#e0ecff']).colors(10)
+PRECIPITATION_RAMP = chroma.scale(['#479633', '#2bb4f1', '#e0ecff']).colors(10)
 
 UI.registerHelper 'percentage', (a, b, digits=0)->
   (100 * a / b).toFixed(digits)
@@ -41,6 +41,22 @@ Template.map.onRendered ->
         label = 'Weekly precipitation in millimeters'
         values = _.range(0, curRamp.length, 2).map (idx)->
           value: (maxValue * idx / curRamp.length).toFixed(0) + " mm"
+          color: curRamp[idx]
+      when 'current-cases'
+        curRamp = OUTBREAK_RAMP
+        label = 'Number of weekly malaria cases'
+        values = _.range(0, curRamp.length, 2).map (idx)->
+          value: utils.round(
+            (idx / curRamp.length) * maxValue
+          , 0)
+          color: curRamp[idx]
+      when 'projected-cases'
+        curRamp = OUTBREAK_RAMP
+        label = 'Expected weekly malaria cases in two months'
+        values = _.range(0, curRamp.length, 2).map (idx)->
+          value: utils.round(
+            (idx / curRamp.length) * maxValue
+          , 0)
           color: curRamp[idx]
       else
         curRamp = OUTBREAK_RAMP
@@ -87,14 +103,17 @@ Template.map.onRendered ->
   style = (feature)=>
     switch FlowRouter.getParam('page')
       when 'precipitation'
-        if _.isNumber feature.properties.district_mean_rainfall_mm
-          x = feature.properties.district_mean_rainfall_mm / maxValue
-        else
-          x = undefined
+        x = feature.properties.district_mean_rainfall_mm
+      when 'current-cases'
+        x = feature.properties.malaria_cases_wep
+      when 'projected-cases'
+        x = feature.properties.projected_cases
       else
-        x = feature.properties.future_outbreaks / feature.properties.occurrences / maxValue
+        x = feature.properties.future_outbreaks / feature.properties.occurrences
+    if not _.isNumber x
+      x = undefined
     return {
-      fillColor: getColor(x)
+      fillColor: getColor(x  / maxValue)
       weight: 1
       opacity: 1
       color: '#DDDDDD'
@@ -168,6 +187,10 @@ Template.map.onRendered ->
           switch FlowRouter.getParam('page')
             when 'precipitation'
               return x.properties.district_mean_rainfall_mm
+            when 'current-cases'
+              return x.properties.malaria_cases_wep
+            when 'projected-cases'
+              return x.properties.projected_cases
             else
               return x.properties.future_outbreaks / x.properties.occurrences
         .filter (x)->x

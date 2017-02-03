@@ -25,10 +25,14 @@ feature_groups = data.groupby(features).agg({
     'future_outbreak': ['sum', 'count'],
     'mean_future_case_multiple': 'median'
 }).reset_index()
-feature_groups.columns = ['_'.join(filter(lambda x:x, col)) for col in feature_groups.columns.values]
+feature_groups.columns = [
+    '_'.join(filter(lambda x:x, col))
+    for col in feature_groups.columns.values]
     
 feature_groups = feature_groups.rename(
-    columns={'future_outbreak_count': 'occurrences', 'future_outbreak_sum': 'future_outbreaks'})
+    columns={
+        'future_outbreak_count': 'occurrences',
+        'future_outbreak_sum': 'future_outbreaks'})
 print("Collecting most recent district stats...")
 as_of_week = data.week.max()
 most_recent_stats = data[data.week == as_of_week]
@@ -44,6 +48,7 @@ most_recent_stats = most_recent_stats[[
     'malaria_cases_wep',
     'occurrences',
     'future_outbreaks',
+    'outbreak_threshold',
     'district_mean_rainfall_mm'] + features]
 most_recent_stats['week'] = most_recent_stats.week.map(lambda d: d.isoformat())
 print(len(most_recent_stats))
